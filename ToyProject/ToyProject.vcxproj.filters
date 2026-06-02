@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="01_Engine">
+      <UniqueIdentifier>{c689c396-2855-40e1-ae43-6855aa99380d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Manager">
+      <UniqueIdentifier>{824f1ed8-a613-4af4-a9f1-893b6f41a9e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99_Etc">
+      <UniqueIdentifier>{8a157ac3-fcdd-4ff3-9b54-93e07ec6dd0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03_Object">
+      <UniqueIdentifier>{e0f2e93a-4e37-45d2-aaf5-399245543668}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03_Object\Shape">
+      <UniqueIdentifier>{d2526b8a-2bf5-4e7a-a055-2a55bc8be218}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Struct.h">
+      <Filter>99_Etc</Filter>
+    </ClInclude>
+    <ClInclude Include="Header.h">
+      <Filter>99_Etc</Filter>
+    </ClInclude>
+    <ClInclude Include="Type.h">
+      <Filter>99_Etc</Filter>
+    </ClInclude>
+    <ClInclude Include="Enum.h">
+      <Filter>99_Etc</Filter>
+    </ClInclude>
+    <ClInclude Include="PreProcess.h">
+      <Filter>99_Etc</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineCore.h">
+      <Filter>99_Etc</Filter>
+    </ClInclude>
+    <ClInclude Include="WinApp.h">
+      <Filter>01_Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>99_Etc</Filter>
+    </ClInclude>
+    <ClInclude Include="Value.h">
+      <Filter>99_Etc</Filter>
+    </ClInclude>
+    <ClInclude Include="TimerManager.h">
+      <Filter>02_Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Shape.h">
+      <Filter>03_Object</Filter>
+    </ClInclude>
+    <ClInclude Include="GDIManager.h">
+      <Filter>02_Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectManager.h">
+      <Filter>02_Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Triangle.h">
+      <Filter>03_Object\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="Rectangle.h">
+      <Filter>03_Object\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="Line.h">
+      <Filter>03_Object\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="Dot.h">
+      <Filter>03_Object\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="Circle.h">
+      <Filter>03_Object\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>02_Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Util.h">
+      <Filter>99_Etc</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ToyProject.rc">
+      <Filter>리소스 파일</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="ToyProject.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="WinApp.cpp">
+      <Filter>01_Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="TimerManager.cpp">
+      <Filter>02_Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Shape.cpp">
+      <Filter>03_Object</Filter>
+    </ClCompile>
+    <ClCompile Include="GDIManager.cpp">
+      <Filter>02_Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectManager.cpp">
+      <Filter>02_Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Triangle.cpp">
+      <Filter>03_Object\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="Rectangle.cpp">
+      <Filter>03_Object\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="Line.cpp">
+      <Filter>03_Object\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="Dot.cpp">
+      <Filter>03_Object\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="Circle.cpp">
+      <Filter>03_Object\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>02_Manager</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
