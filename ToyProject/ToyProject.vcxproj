@@ -140,7 +140,7 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Struct.h" />
     <ClInclude Include="TimerManager.h" />
-    <ClInclude Include="Triangle.h" />
+    <ClInclude Include="Polygon.h" />
     <ClInclude Include="Type.h" />
     <ClInclude Include="Util.h" />
     <ClInclude Include="Value.h" />
@@ -157,7 +157,7 @@
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="TimerManager.cpp" />
-    <ClCompile Include="Triangle.cpp" />
+    <ClCompile Include="Polygon.cpp" />
     <ClCompile Include="WinApp.cpp" />
   </ItemGroup>
   <ItemGroup>

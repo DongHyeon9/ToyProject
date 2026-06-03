@@ -1,23 +1,21 @@
 #pragma once
 #include "Shape.h"
 
-class CLine : public IShape
+// 이름은 폴리곤이지만 삼각형이다
+class CPolygon : public IShape
 {
 public:
-	CLine() :IShape(EShapeType::Line) {}
+	CPolygon() :IShape(EShapeType::Polygon) {}
 	bool CheckCollision(const POINT& pt) const override;
 	void SetArea(const RECT& Rect) override;
 
-	void SetStart(const POINT& Point);
-	void SetEnd(const POINT& Point);
+	void SetPolygon(const std::array<POINT, 3>& Points);
+	void SetPoint(const POINT& Point, int32 Idx);
 
 protected:
 	void Render_Impl(HDC Buffer) override;
 	void SelectedRender_Impl(HDC Buffer) override;
 
 private:
-	POINT start{};
-	POINT end{};
-
+	std::array<POINT, 3> points{};
 };
-

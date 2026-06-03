@@ -24,7 +24,6 @@ bool InputManager::RegisterMessage()
 {
 	REGIST_MESSAGE(WM_COMMAND, OnCommand);
 	REGIST_MESSAGE(WM_DESTROY, OnDestroy);
-	REGIST_MESSAGE(WM_PAINT, OnPaint);
 	REGIST_MESSAGE(WM_LBUTTONDOWN, OnLButtonDown);
 	REGIST_MESSAGE(WM_LBUTTONUP, OnLButtonUp);
 	REGIST_MESSAGE(WM_MOUSEMOVE, OnMouseMove);
@@ -68,29 +67,36 @@ LRESULT InputManager::OnDestroy(HWND Wnd, WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
-LRESULT InputManager::OnPaint(HWND Wnd, WPARAM wParam, LPARAM lParam)
-{
-
-	return 0;
-}
-
 LRESULT InputManager::OnLButtonDown(HWND Wnd, WPARAM wParam, LPARAM lParam)
 {
 	LOG("LButtonDown : (%d, %d)", LOWORD(lParam), HIWORD(lParam));
-	ObjectManager::GetInstance().BeginSelectArea({ LOWORD(lParam), HIWORD(lParam) });
+
+	if (state == EState::Create)
+	{
+
+	}
+
+	ObjectManager::GetInstance().OnButtonDown({ LOWORD(lParam), HIWORD(lParam) }, state, shapeType);
 	return 0;
 }
 
 LRESULT InputManager::OnLButtonUp(HWND Wnd, WPARAM wParam, LPARAM lParam)
 {
 	LOG("LButtonUp : (%d, %d)", LOWORD(lParam), HIWORD(lParam));
-	ObjectManager::GetInstance().EndSelectArea();
+	
+
+	if (state == EState::Create)
+	{
+		state = EState::None;
+	}
+
+	ObjectManager::GetInstance().OnButtonUp({ LOWORD(lParam), HIWORD(lParam) }, state, shapeType);
 	return 0;
 }
 
 LRESULT InputManager::OnMouseMove(HWND Wnd, WPARAM wParam, LPARAM lParam)
 {
-	ObjectManager::GetInstance().UpdateSelectArea({ LOWORD(lParam), HIWORD(lParam) });
+	ObjectManager::GetInstance().OnMouseMove({ LOWORD(lParam), HIWORD(lParam) });
 	return 0;
 }
 
@@ -110,31 +116,42 @@ LRESULT InputManager::OnExit(HWND Wnd, WPARAM wParam, LPARAM lParam)
 LRESULT InputManager::OnAllDelete(HWND Wnd, WPARAM wParam, LPARAM lParam)
 {
 	ObjectManager::GetInstance().AllDelete();
+	LOG("전체 삭제");
 	return 0;
 }
 
 LRESULT InputManager::OnDot(HWND Wnd, WPARAM wParam, LPARAM lParam)
 {
+	state = EState::Create;
+	shapeType = EShapeType::Dot;
 	return 0;
 }
 
 LRESULT InputManager::OnLine(HWND Wnd, WPARAM wParam, LPARAM lParam)
 {
+	state = EState::Create;
+	shapeType = EShapeType::Line;
 	return 0;
 }
 
 LRESULT InputManager::OnCircle(HWND Wnd, WPARAM wParam, LPARAM lParam)
 {
+	state = EState::Create;
+	shapeType = EShapeType::Circle;
 	return 0;
 }
 
 LRESULT InputManager::OnTriangle(HWND Wnd, WPARAM wParam, LPARAM lParam)
 {
+	state = EState::Create;
+	shapeType = EShapeType::Polygon;
 	return 0;
 }
 
 LRESULT InputManager::OnRect(HWND Wnd, WPARAM wParam, LPARAM lParam)
 {
+	state = EState::Create;
+	shapeType = EShapeType::Rect;
 	return 0;
 }
 

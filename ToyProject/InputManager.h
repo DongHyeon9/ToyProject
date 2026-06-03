@@ -15,7 +15,6 @@ private:
 #pragma region 메세지 처리 함수
 	LRESULT OnCommand(HWND Wnd, WPARAM wParam, LPARAM lParam);
 	LRESULT OnDestroy(HWND Wnd, WPARAM wParam, LPARAM lParam);
-	LRESULT OnPaint(HWND Wnd, WPARAM wParam, LPARAM lParam);
 	LRESULT OnLButtonDown(HWND Wnd, WPARAM wParam, LPARAM lParam);
 	LRESULT OnLButtonUp(HWND Wnd, WPARAM wParam, LPARAM lParam);
 	LRESULT OnMouseMove(HWND Wnd, WPARAM wParam, LPARAM lParam);
@@ -35,6 +34,9 @@ private:
 private:
 	std::unordered_map<UINT, std::function<LRESULT(HWND, WPARAM, LPARAM)>> messageLUT{};
 	std::unordered_map<UINT, std::function<LRESULT(HWND, WPARAM, LPARAM)>> commandLUT{};
+
+	EState state{};
+	EShapeType shapeType{};
 
 };
 

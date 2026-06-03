@@ -36,9 +36,3 @@ struct WindowDesc
 	int32 cmdShow{};
 	Vector2 size{ 1280, 720 };
 };
-
-struct Point
-{
-	int32 x{};
-	int32 y{};
-};

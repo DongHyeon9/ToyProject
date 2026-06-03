@@ -61,7 +61,7 @@
     <ClInclude Include="ObjectManager.h">
       <Filter>02_Manager</Filter>
     </ClInclude>
-    <ClInclude Include="Triangle.h">
+    <ClInclude Include="Polygon.h">
       <Filter>03_Object\Shape</Filter>
     </ClInclude>
     <ClInclude Include="Rectangle.h">
@@ -113,7 +113,7 @@
     <ClCompile Include="ObjectManager.cpp">
       <Filter>02_Manager</Filter>
     </ClCompile>
-    <ClCompile Include="Triangle.cpp">
+    <ClCompile Include="Polygon.cpp">
       <Filter>03_Object\Shape</Filter>
     </ClCompile>
     <ClCompile Include="Rectangle.cpp">

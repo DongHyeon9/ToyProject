@@ -1,6 +1,9 @@
 #include "ObjectManager.h"
-#include "Shape.h"
 #include "Rectangle.h"
+#include "Polygon.h"
+#include "Circle.h"
+#include "Dot.h"
+#include "Line.h"
 
 bool ObjectManager::Init()
 {
@@ -21,7 +24,10 @@ void ObjectManager::Render(HDC Buffer, RECT Rect)
 	for (const auto& shape : shapes)
 		shape->Render(Buffer);
 
-	if (bSelecting)
+	if (tempShape)
+		tempShape->Render(Buffer);
+
+	if (bSelecting && !tempShape)
 		selectBox->Render(Buffer);
 }
 
@@ -30,18 +36,67 @@ void ObjectManager::Terminate()
 
 }
 
-void ObjectManager::BeginSelectArea(const Point& pt)
+void ObjectManager::OnButtonDown(const POINT& Point, EState State, EShapeType ShapeType)
 {
+	state = State;
+	shapeType = ShapeType;
+	startPoint = Point;
+	endPoint = Point;
+	if (state == EState::Create)
+	{
+		tempShape = CreateShape(shapeType);
+		tempShape->SetMaterial({ EPenType::TempShape, EBrushType::TempShape });
+	}
 	bSelecting = true;
-	selectBox->SetRenctangle(pt, pt);
+	
 }
 
-void ObjectManager::UpdateSelectArea(const Point& pt)
+void ObjectManager::OnMouseMove(const POINT& Point)
 {
-	selectBox->SetRightBottom(pt);
+	if (bSelecting)
+	{
+		endPoint = Point;
+		selectBox->SetRenctangle(startPoint, endPoint);
+	}
+
+	if (tempShape)
+		tempShape->SetArea({ startPoint.x, startPoint.y, endPoint.x, endPoint.y });
 }
 
-void ObjectManager::EndSelectArea()
+void ObjectManager::OnButtonUp(const POINT& Point, EState State, EShapeType ShapeType)
 {
+	if (state == EState::Create)
+	{
+		tempShape->SetMaterial({ EngineUtil::RandomRange(EPenType::Black,EPenType::Blue),EngineUtil::RandomRange(EBrushType::Black,EBrushType::White) });
+		shapes.emplace_back(std::move(tempShape));
+	}
+	else if (state == EState::Selected)
+	{
+
+	}
+	else if (state == EState::None)
+	{
+
+	}
+	state = State;
+	shapeType = ShapeType;
 	bSelecting = false;
 }
+
+std::shared_ptr<IShape> ObjectManager::CreateShape(EShapeType ShapeType)
+{
+	std::shared_ptr<IShape> result{};
+
+	switch (ShapeType)
+	{
+	case EShapeType::Circle:	result = std::make_shared<CCircle>();		break;
+	case EShapeType::Dot:		result = std::make_shared<CDot>();			break;
+	case EShapeType::Line:		result = std::make_shared<CLine>();			break;
+	case EShapeType::Polygon:	result = std::make_shared<CPolygon>();		break;
+	case EShapeType::Rect:		result = std::make_shared<CRectangle>();	break;
+	default:	assert(false);
+	}
+
+	return result;
+}
+

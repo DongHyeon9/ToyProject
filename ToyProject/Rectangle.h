@@ -4,11 +4,14 @@
 class CRectangle : public IShape
 {
 public:
-	bool CheckCollision(const Point& pt) const override;
-	void SetRenctangle(const Point& LT, const Point& RB);
+	CRectangle() :IShape(EShapeType::Rect) {}
+	bool CheckCollision(const POINT& pt) const override;
+	void SetArea(const RECT& Rect) override;
+
+	void SetRenctangle(const POINT& LT, const POINT& RB);
 	void SetRenctangle(const RECT& Rect);
-	void SetLeftTop(const Point& LT);
-	void SetRightBottom(const Point& RB);
+	void SetLeftTop(const POINT& LT);
+	void SetRightBottom(const POINT& RB);
 	void SetLeft(int32 Value);
 	void SetTop(int32 Value);
 	void SetRight(int32 Value);
@@ -19,7 +22,7 @@ protected:
 	void SelectedRender_Impl(HDC Buffer) override;
 
 private:
-	Point lt{};
-	Point rb{};
+	POINT lt{};
+	POINT rb{};
 };
 

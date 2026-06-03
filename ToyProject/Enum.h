@@ -16,7 +16,7 @@ enum class EShapeType : uint8
 	Dot,
 	Line,
 	Circle,
-	Triangle,
+	Polygon,
 	Rect
 };
 
@@ -29,6 +29,7 @@ enum class EPenType : uint8
 
 	SelectBox,
 	Selected,
+	TempShape,
 };
 
 enum class EBrushType : uint8
@@ -41,4 +42,5 @@ enum class EBrushType : uint8
 
 	SelectBox,
 	Selected,
+	TempShape,
 };

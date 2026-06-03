@@ -10,12 +10,17 @@ void CRectangle::SelectedRender_Impl(HDC Buffer)
 	
 }
 
-bool CRectangle::CheckCollision(const Point& pt) const
+bool CRectangle::CheckCollision(const POINT& pt) const
 {
 	return false;
 }
 
-void CRectangle::SetRenctangle(const Point& LT, const Point& RB)
+void CRectangle::SetArea(const RECT& Rect)
+{
+	SetRenctangle(Rect);
+}
+
+void CRectangle::SetRenctangle(const POINT& LT, const POINT& RB)
 {
 	lt = LT;
 	rb = RB;
@@ -29,12 +34,12 @@ void CRectangle::SetRenctangle(const RECT& Rect)
 	rb.y = Rect.bottom;
 }
 
-void CRectangle::SetLeftTop(const Point& LT)
+void CRectangle::SetLeftTop(const POINT& LT)
 {
 	lt = LT;
 }
 
-void CRectangle::SetRightBottom(const Point& RB)
+void CRectangle::SetRightBottom(const POINT& RB)
 {
 	rb = RB;
 }
