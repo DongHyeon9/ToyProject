@@ -65,7 +65,7 @@ bool GDIManager::CreatePens()
 	pens[EPenType::Blue] = ::CreatePen(PS_SOLID, 1, RGB(0, 0, 255));
 	pens[EPenType::Black] = ::CreatePen(PS_SOLID, 1, RGB(0, 0, 0));
 	pens[EPenType::SelectBox] = ::CreatePen(PS_DOT, 1, RGB(0, 180, 0));
-	pens[EPenType::Selected] = ::CreatePen(PS_SOLID, 2, RGB(200, 0, 0));
+	pens[EPenType::Selected] = ::CreatePen(PS_SOLID, 7, RGB(200, 0, 0));
 	pens[EPenType::TempShape] = ::CreatePen(PS_DOT, 1, RGB(200, 0, 0));
 	LOG("Ææ »ý¼º ¼º°ø");
 	return true;

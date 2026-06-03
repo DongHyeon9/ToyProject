@@ -22,3 +22,27 @@ namespace EngineUtil
 		return static_cast<T>(dis(gen));
 	}
 }
+
+
+inline POINT operator+(const POINT& Lhs, const POINT& Rhs)
+{
+	return POINT{ Lhs.x + Rhs.x, Lhs.y + Rhs.y };
+}
+
+
+inline POINT operator-(const POINT& Lhs, const POINT& Rhs)
+{
+	return POINT{ Lhs.x - Rhs.x, Lhs.y - Rhs.y };
+}
+
+inline void operator+=(POINT& Lhs, const POINT& Rhs)
+{
+	Lhs.x += Rhs.x;
+	Lhs.y += Rhs.y;
+}
+
+inline void operator-=(POINT& Lhs, const POINT& Rhs)
+{
+	Lhs.x -= Rhs.x;
+	Lhs.y -= Rhs.y;
+}

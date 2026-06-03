@@ -11,6 +11,7 @@ public:
 private:
 	bool RegisterMessage();
 	bool RegisterCommand();
+	bool RegisterKeydown();
 
 #pragma region 메세지 처리 함수
 	LRESULT OnCommand(HWND Wnd, WPARAM wParam, LPARAM lParam);
@@ -24,6 +25,7 @@ private:
 #pragma region 커맨드 처리 함수
 	LRESULT OnExit(HWND Wnd, WPARAM wParam, LPARAM lParam);
 	LRESULT OnAllDelete(HWND Wnd, WPARAM wParam, LPARAM lParam);
+	LRESULT OnSelectDelete(HWND Wnd, WPARAM wParam, LPARAM lParam);
 	LRESULT OnDot(HWND Wnd, WPARAM wParam, LPARAM lParam);
 	LRESULT OnLine(HWND Wnd, WPARAM wParam, LPARAM lParam);
 	LRESULT OnCircle(HWND Wnd, WPARAM wParam, LPARAM lParam);
@@ -31,12 +33,14 @@ private:
 	LRESULT OnRect(HWND Wnd, WPARAM wParam, LPARAM lParam);
 #pragma endregion
 
+#pragma region 키입력 처리 함수
+	LRESULT OnEscape(HWND Wnd, WPARAM wParam, LPARAM lParam);
+#pragma endregion
+
 private:
 	std::unordered_map<UINT, std::function<LRESULT(HWND, WPARAM, LPARAM)>> messageLUT{};
 	std::unordered_map<UINT, std::function<LRESULT(HWND, WPARAM, LPARAM)>> commandLUT{};
-
-	EState state{};
-	EShapeType shapeType{};
+	std::unordered_map<UINT, std::function<LRESULT(HWND, WPARAM, LPARAM)>> keyDownLUT{};
 
 };
 

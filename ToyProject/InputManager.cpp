@@ -5,6 +5,7 @@
 
 #define REGIST_MESSAGE(msg, func) messageLUT[msg] = [this](HWND Wnd, WPARAM wParam, LPARAM lParam) { return func(Wnd, wParam, lParam); }
 #define REGIST_COMMAND(cmd, func) commandLUT[cmd] = [this](HWND Wnd, WPARAM wParam, LPARAM lParam) { return func(Wnd, wParam, lParam); }
+#define REGIST_KEYDOWN(key, func) commandLUT[key] = [this](HWND Wnd, WPARAM wParam, LPARAM lParam) { return func(Wnd, wParam, lParam); }
 
 bool InputManager::Init()
 {
@@ -23,12 +24,14 @@ void InputManager::Terminate()
 bool InputManager::RegisterMessage()
 {
 	REGIST_MESSAGE(WM_COMMAND, OnCommand);
+	REGIST_MESSAGE(WM_KEYDOWN, OnCommand);
+
 	REGIST_MESSAGE(WM_DESTROY, OnDestroy);
 	REGIST_MESSAGE(WM_LBUTTONDOWN, OnLButtonDown);
 	REGIST_MESSAGE(WM_LBUTTONUP, OnLButtonUp);
 	REGIST_MESSAGE(WM_MOUSEMOVE, OnMouseMove);
 	REGIST_MESSAGE(WM_SIZE, OnSize);
-
+	
 	return true;
 }
 
@@ -41,6 +44,9 @@ bool InputManager::RegisterCommand()
 	REGIST_COMMAND(ID_CIRCLE, OnCircle);
 	REGIST_COMMAND(ID_TRIANGLE, OnTriangle);
 	REGIST_COMMAND(ID_RECT, OnRect);
+	REGIST_COMMAND(ID_SELECT_DELETE, OnSelectDelete);
+
+	REGIST_KEYDOWN(VK_ESCAPE, OnEscape);
 
 	return true;
 }
@@ -70,27 +76,14 @@ LRESULT InputManager::OnDestroy(HWND Wnd, WPARAM wParam, LPARAM lParam)
 LRESULT InputManager::OnLButtonDown(HWND Wnd, WPARAM wParam, LPARAM lParam)
 {
 	LOG("LButtonDown : (%d, %d)", LOWORD(lParam), HIWORD(lParam));
-
-	if (state == EState::Create)
-	{
-
-	}
-
-	ObjectManager::GetInstance().OnButtonDown({ LOWORD(lParam), HIWORD(lParam) }, state, shapeType);
+	ObjectManager::GetInstance().OnButtonDown({ LOWORD(lParam), HIWORD(lParam) });
 	return 0;
 }
 
 LRESULT InputManager::OnLButtonUp(HWND Wnd, WPARAM wParam, LPARAM lParam)
 {
 	LOG("LButtonUp : (%d, %d)", LOWORD(lParam), HIWORD(lParam));
-	
-
-	if (state == EState::Create)
-	{
-		state = EState::None;
-	}
-
-	ObjectManager::GetInstance().OnButtonUp({ LOWORD(lParam), HIWORD(lParam) }, state, shapeType);
+	ObjectManager::GetInstance().OnButtonUp({ LOWORD(lParam), HIWORD(lParam) });
 	return 0;
 }
 
@@ -107,6 +100,13 @@ LRESULT InputManager::OnSize(HWND Wnd, WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
+LRESULT InputManager::OnEscape(HWND Wnd, WPARAM wParam, LPARAM lParam)
+{
+	ObjectManager::GetInstance().CancelSelect();
+	LOG("선택 취소");
+	return 0;
+}
+
 LRESULT InputManager::OnExit(HWND Wnd, WPARAM wParam, LPARAM lParam)
 {
 	::PostQuitMessage(0);
@@ -120,38 +120,45 @@ LRESULT InputManager::OnAllDelete(HWND Wnd, WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
+LRESULT InputManager::OnSelectDelete(HWND Wnd, WPARAM wParam, LPARAM lParam)
+{
+	ObjectManager::GetInstance().SelectDelete();
+	LOG("선택 삭제");
+	return 0;
+}
+
 LRESULT InputManager::OnDot(HWND Wnd, WPARAM wParam, LPARAM lParam)
 {
-	state = EState::Create;
-	shapeType = EShapeType::Dot;
+	ObjectManager::GetInstance().SetState(EState::Create);
+	ObjectManager::GetInstance().SetShapeType(EShapeType::Dot);
 	return 0;
 }
 
 LRESULT InputManager::OnLine(HWND Wnd, WPARAM wParam, LPARAM lParam)
 {
-	state = EState::Create;
-	shapeType = EShapeType::Line;
+	ObjectManager::GetInstance().SetState(EState::Create);
+	ObjectManager::GetInstance().SetShapeType(EShapeType::Line);
 	return 0;
 }
 
 LRESULT InputManager::OnCircle(HWND Wnd, WPARAM wParam, LPARAM lParam)
 {
-	state = EState::Create;
-	shapeType = EShapeType::Circle;
+	ObjectManager::GetInstance().SetState(EState::Create);
+	ObjectManager::GetInstance().SetShapeType(EShapeType::Circle);
 	return 0;
 }
 
 LRESULT InputManager::OnTriangle(HWND Wnd, WPARAM wParam, LPARAM lParam)
 {
-	state = EState::Create;
-	shapeType = EShapeType::Polygon;
+	ObjectManager::GetInstance().SetState(EState::Create);
+	ObjectManager::GetInstance().SetShapeType(EShapeType::Polygon);
 	return 0;
 }
 
 LRESULT InputManager::OnRect(HWND Wnd, WPARAM wParam, LPARAM lParam)
 {
-	state = EState::Create;
-	shapeType = EShapeType::Rect;
+	ObjectManager::GetInstance().SetState(EState::Create);
+	ObjectManager::GetInstance().SetShapeType(EShapeType::Rect);
 	return 0;
 }
 

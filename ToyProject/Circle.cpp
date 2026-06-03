@@ -2,20 +2,12 @@
 
 void CCircle::Render_Impl(HDC Buffer)
 {
+	POINT finalCenter{ center - GetRelativePoint() };
 	::Ellipse(Buffer
-		, center.x - radius
-		, center.y - radius
-		, center.x + radius
-		, center.y + radius);
-}
-
-void CCircle::SelectedRender_Impl(HDC Buffer)
-{
-}
-
-bool CCircle::CheckCollision(const POINT& pt) const
-{
-	return false;
+		, finalCenter.x - radius
+		, finalCenter.y - radius
+		, finalCenter.x + radius
+		, finalCenter.y + radius);
 }
 
 void CCircle::SetArea(const RECT& Rect)
@@ -24,6 +16,29 @@ void CCircle::SetArea(const RECT& Rect)
 	center.y = static_cast<int32>((Rect.top + Rect.bottom) * 0.5f);
 	
 	radius = min(std::abs(Rect.left - Rect.right), std::abs(Rect.top - Rect.bottom));
+}
+
+bool CCircle::CheckOverlap(std::shared_ptr<IShape> Rhs) const
+{
+	return true;
+}
+
+EState CCircle::GetState() const
+{
+	return EState();
+}
+
+void CCircle::EditShape(const RECT& Rect)
+{
+}
+
+void CCircle::ConfirmEdit()
+{
+}
+
+void CCircle::AddCoordinate(const POINT& Point)
+{
+	center += Point;
 }
 
 void CCircle::SetCenter(const POINT& Point)

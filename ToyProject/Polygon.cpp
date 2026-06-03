@@ -2,16 +2,12 @@
 
 void CPolygon::Render_Impl(HDC Buffer)
 {
-	::Polygon(Buffer, points.data(), static_cast<int32>(points.size()));
-}
+	std::array<POINT, 3> finalPoints{ points };
+	POINT relativePoint = GetRelativePoint();
+	for (auto& point : finalPoints)
+		point -= relativePoint;
 
-void CPolygon::SelectedRender_Impl(HDC Buffer)
-{
-}
-
-bool CPolygon::CheckCollision(const POINT& pt) const
-{
-	return false;
+	::Polygon(Buffer, finalPoints.data(), static_cast<int32>(finalPoints.size()));
 }
 
 void CPolygon::SetArea(const RECT& Rect)
@@ -24,6 +20,30 @@ void CPolygon::SetArea(const RECT& Rect)
 
 	points[2].x = Rect.left;
 	points[2].y = Rect.bottom;
+}
+
+bool CPolygon::CheckOverlap(std::shared_ptr<IShape> Rhs) const
+{
+	return true;
+}
+
+EState CPolygon::GetState() const
+{
+	return EState();
+}
+
+void CPolygon::EditShape(const RECT& Rect)
+{
+}
+
+void CPolygon::ConfirmEdit()
+{
+}
+
+void CPolygon::AddCoordinate(const POINT& Point)
+{
+	for (auto& point : points)
+		point += Point;
 }
 
 void CPolygon::SetPolygon(const std::array<POINT, 3>& Points)

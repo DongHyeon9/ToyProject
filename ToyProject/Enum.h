@@ -5,7 +5,9 @@ enum class EState : uint8
 {
 	None,
 
-	Selected,
+	Selecting,
+	Edit,
+	Move,
 	Create,
 };
 

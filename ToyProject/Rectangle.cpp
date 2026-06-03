@@ -2,22 +2,39 @@
 
 void CRectangle::Render_Impl(HDC Buffer)
 {
-	::Rectangle(Buffer, lt.x, lt.y, rb.x, rb.y);
-}
-
-void CRectangle::SelectedRender_Impl(HDC Buffer)
-{
-	
-}
-
-bool CRectangle::CheckCollision(const POINT& pt) const
-{
-	return false;
+	const POINT relativePoint = GetRelativePoint();
+	POINT finalLT = lt - relativePoint;
+	POINT finalRB = rb - relativePoint;
+	::Rectangle(Buffer, finalLT.x, finalLT.y, finalRB.x, finalRB.y);
 }
 
 void CRectangle::SetArea(const RECT& Rect)
 {
 	SetRenctangle(Rect);
+}
+
+bool CRectangle::CheckOverlap(std::shared_ptr<IShape> Rhs) const
+{
+	return true;
+}
+
+EState CRectangle::GetState() const
+{
+	return EState();
+}
+
+void CRectangle::EditShape(const RECT& Rect)
+{
+}
+
+void CRectangle::ConfirmEdit()
+{
+}
+
+void CRectangle::AddCoordinate(const POINT& Point)
+{
+	lt += Point;
+	rb += Point;
 }
 
 void CRectangle::SetRenctangle(const POINT& LT, const POINT& RB)
