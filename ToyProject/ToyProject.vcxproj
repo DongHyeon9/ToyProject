@@ -160,6 +160,7 @@
     <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="TimerManager.cpp" />
     <ClCompile Include="Polygon.cpp" />
+    <ClCompile Include="Util.cpp" />
     <ClCompile Include="WinApp.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -168,6 +169,9 @@
   <ItemGroup>
     <Image Include="small.ico" />
     <Image Include="ToyProject.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

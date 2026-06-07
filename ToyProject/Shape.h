@@ -1,7 +1,9 @@
 #pragma once
 #include "EngineCore.h"
 
-class IShape
+class CRectangle;
+
+class IShape : public std::enable_shared_from_this<IShape>
 {
 public:
 	IShape(EShapeType ShapeType);
@@ -12,11 +14,12 @@ public:
 
 	virtual void SetArea(const RECT& Rect) = 0;
 	virtual bool CheckOverlap(std::shared_ptr<IShape> Rhs) const = 0;
+	virtual bool CheckOverlap(const POINT& Point) const = 0;
 	virtual EState GetState() const = 0;
-	virtual void EditShape(const RECT& Rect) = 0;
-	virtual void ConfirmEdit() = 0;
 	virtual void AddCoordinate(const POINT& Point) = 0;
-
+	virtual void CandidateEditPoint(std::shared_ptr<IShape> Rect) = 0;
+	virtual void ConfirmEdit() = 0;
+	
 	void SetRelativePoint(const POINT& Point);
 	POINT GetRelativePoint()const { return relativePoint; }
 	int32 GetZOrder() const { return ZOrder; }

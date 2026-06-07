@@ -79,13 +79,9 @@ void ObjectManager::SetShapeType(EShapeType ShapeType)
 
 void ObjectManager::OnButtonDown(const POINT& Point)
 {
-	bMouseDown = true;
 	startPoint = Point;
 	endPoint = Point;
-	if (state == EState::Create)
-	{
-		return;
-	}
+	if (state == EState::Create) {}
 	else if (state == EState::None)
 	{
 		if (selectedShapes.size() == 1)
@@ -103,18 +99,11 @@ void ObjectManager::OnButtonDown(const POINT& Point)
 			state = EState::Move;
 		}
 	}
-	else if (state == EState::Selecting)
-	{
-		return;
-	}
-	else if (state == EState::Move)
-	{
-		return;
-	}
-	else if (state == EState::Edit)
-	{
-		return;
-	}
+	else if (state == EState::Selecting) {}
+	else if (state == EState::Move) {}
+	else if (state == EState::Edit) {}
+
+	bMouseDown = true;
 }
 
 void ObjectManager::OnMouseMove(const POINT& Point)
@@ -126,10 +115,7 @@ void ObjectManager::OnMouseMove(const POINT& Point)
 	{
 		tempShape->SetArea({ startPoint.x, startPoint.y, endPoint.x, endPoint.y });
 	}
-	else if (state == EState::None)
-	{
-		return;
-	}
+	else if (state == EState::None) {}
 	else if (state == EState::Selecting)
 	{
 		selectBox->SetRenctangle(startPoint, endPoint);
@@ -142,7 +128,7 @@ void ObjectManager::OnMouseMove(const POINT& Point)
 	else if (state == EState::Edit)
 	{
 		for (auto& shape : selectedShapes)
-			shape->EditShape({ startPoint.x, startPoint.y, endPoint.x, endPoint.y });
+			shape->SetRelativePoint(startPoint - endPoint);
 	}		
 }
 
@@ -161,7 +147,10 @@ void ObjectManager::OnButtonUp(const POINT& Point)
 		for (const auto& shape : shapes)
 		{
 			if (shape->CheckOverlap(selectBox))
+			{
+				shape->CandidateEditPoint(selectBox);
 				selectedShapes.emplace_back(shape);
+			}
 		}
 	}
 	else if (state == EState::Move)
@@ -175,7 +164,9 @@ void ObjectManager::OnButtonUp(const POINT& Point)
 	else if (state == EState::Edit)
 	{
 		for (auto& shape : selectedShapes)
+		{
 			shape->ConfirmEdit();
+		}
 	}
 
 	bMouseDown = false;

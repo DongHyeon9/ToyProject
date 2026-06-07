@@ -131,5 +131,11 @@
     <ClCompile Include="InputManager.cpp">
       <Filter>02_Manager</Filter>
     </ClCompile>
+    <ClCompile Include="Util.cpp">
+      <Filter>99_Etc</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

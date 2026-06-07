@@ -20,25 +20,45 @@ void CCircle::SetArea(const RECT& Rect)
 
 bool CCircle::CheckOverlap(std::shared_ptr<IShape> Rhs) const
 {
-	return true;
+	const EShapeType rhsShapeType{ Rhs->GetShapeType() };
+	
+	switch (rhsShapeType)
+	{
+	case EShapeType::Rect:		return EngineUtil::IsOverlap(std::static_pointer_cast<CRectangle>(Rhs), std::static_pointer_cast<CCircle>(shared_from_this()));
+	case EShapeType::Circle:	return EngineUtil::IsOverlap(std::static_pointer_cast<CCircle>(shared_from_this()), std::static_pointer_cast<CCircle>(Rhs));
+	case EShapeType::Dot:		return EngineUtil::IsOverlap(std::static_pointer_cast<CDot>(Rhs), std::static_pointer_cast<CCircle>(shared_from_this()));
+	case EShapeType::Line:		return EngineUtil::IsOverlap(std::static_pointer_cast<CLine>(Rhs), std::static_pointer_cast<CCircle>(shared_from_this()));
+	case EShapeType::Polygon:	return EngineUtil::IsOverlap(std::static_pointer_cast<CPolygon>(Rhs), std::static_pointer_cast<CCircle>(shared_from_this()));
+
+	default:	assert(false);	break;
+	}
+
+	return false;
+}
+
+bool CCircle::CheckOverlap(const POINT& Point) const
+{
+	return radius >= std::sqrt(std::pow(Point.x - center.x, 2) + std::pow(Point.y - center.y, 2));
 }
 
 EState CCircle::GetState() const
 {
-	return EState();
-}
-
-void CCircle::EditShape(const RECT& Rect)
-{
-}
-
-void CCircle::ConfirmEdit()
-{
+	return EState::Move;
 }
 
 void CCircle::AddCoordinate(const POINT& Point)
 {
 	center += Point;
+}
+
+void CCircle::CandidateEditPoint(std::shared_ptr<IShape> Rect)
+{
+}
+
+void CCircle::ConfirmEdit()
+{
+	center += GetRelativePoint();
+	SetRelativePoint(POINT{});
 }
 
 void CCircle::SetCenter(const POINT& Point)
