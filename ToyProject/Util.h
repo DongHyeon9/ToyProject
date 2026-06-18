@@ -35,39 +35,39 @@ namespace EngineUtil
 	}
 
 	// 사각형, 사각형
-	bool IsOverlap(std::shared_ptr<CRectangle> Lhs, std::shared_ptr<CRectangle> Rhs);
+	bool IsOverlap(std::shared_ptr<const CRectangle> Lhs, std::shared_ptr<const CRectangle> Rhs);
 	// 사각형, 삼각형
-	bool IsOverlap(std::shared_ptr<CRectangle> Lhs, std::shared_ptr<CPolygon> Rhs);
+	bool IsOverlap(std::shared_ptr<const CRectangle> Lhs, std::shared_ptr<const CPolygon> Rhs);
 	// 사각형, 선
-	bool IsOverlap(std::shared_ptr<CRectangle> Lhs, std::shared_ptr<CLine> Rhs);
+	bool IsOverlap(std::shared_ptr<const CRectangle> Lhs, std::shared_ptr<const CLine> Rhs);
 	// 사각형, 점
-	bool IsOverlap(std::shared_ptr<CRectangle> Lhs, std::shared_ptr<CDot> Rhs);
+	bool IsOverlap(std::shared_ptr<const CRectangle> Lhs, std::shared_ptr<const CDot> Rhs);
 	// 사각형, 원
-	bool IsOverlap(std::shared_ptr<CRectangle> Lhs, std::shared_ptr<CCircle> Rhs);
+	bool IsOverlap(std::shared_ptr<const CRectangle> Lhs, std::shared_ptr<const CCircle> Rhs);
 
 	// 삼각형, 삼각형
-	bool IsOverlap(std::shared_ptr<CPolygon> Lhs, std::shared_ptr<CPolygon> Rhs);
+	bool IsOverlap(std::shared_ptr<const CPolygon> Lhs, std::shared_ptr<const CPolygon> Rhs);
 	// 삼각형, 선
-	bool IsOverlap(std::shared_ptr<CPolygon> Lhs, std::shared_ptr<CLine> Rhs);
+	bool IsOverlap(std::shared_ptr<const CPolygon> Lhs, std::shared_ptr<const CLine> Rhs);
 	// 삼각형, 점
-	bool IsOverlap(std::shared_ptr<CPolygon> Lhs, std::shared_ptr<CDot> Rhs);
+	bool IsOverlap(std::shared_ptr<const CPolygon> Lhs, std::shared_ptr<const CDot> Rhs);
 	// 삼각형, 원
-	bool IsOverlap(std::shared_ptr<CPolygon> Lhs, std::shared_ptr<CCircle> Rhs);
+	bool IsOverlap(std::shared_ptr<const CPolygon> Lhs, std::shared_ptr<const CCircle> Rhs);
 
 	// 선, 선
-	bool IsOverlap(std::shared_ptr<CLine> Lhs, std::shared_ptr<CLine> Rhs);
+	bool IsOverlap(std::shared_ptr<const CLine> Lhs, std::shared_ptr<const CLine> Rhs);
 	// 선, 점
-	bool IsOverlap(std::shared_ptr<CLine> Lhs, std::shared_ptr<CDot> Rhs);
+	bool IsOverlap(std::shared_ptr<const CLine> Lhs, std::shared_ptr<const CDot> Rhs);
 	// 선, 원
-	bool IsOverlap(std::shared_ptr<CLine> Lhs, std::shared_ptr<CCircle> Rhs);
+	bool IsOverlap(std::shared_ptr<const CLine> Lhs, std::shared_ptr<const CCircle> Rhs);
 
 	// 점, 점
-	bool IsOverlap(std::shared_ptr<CDot> Lhs, std::shared_ptr<CDot> Rhs);
+	bool IsOverlap(std::shared_ptr<const CDot> Lhs, std::shared_ptr<const CDot> Rhs);
 	// 점, 원
-	bool IsOverlap(std::shared_ptr<CDot> Lhs, std::shared_ptr<CCircle> Rhs);
+	bool IsOverlap(std::shared_ptr<const CDot> Lhs, std::shared_ptr<const CCircle> Rhs);
 
 	// 원, 원
-	bool IsOverlap(std::shared_ptr<CCircle> Lhs, std::shared_ptr<CCircle> Rhs);
+	bool IsOverlap(std::shared_ptr<const CCircle> Lhs, std::shared_ptr<const CCircle> Rhs);
 }
 
 

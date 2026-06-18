@@ -1,4 +1,8 @@
 #include "Rectangle.h"
+#include "Polygon.h"
+#include "Circle.h"
+#include "Dot.h"
+#include "Line.h"
 
 void CRectangle::Render_Impl(HDC Buffer)
 {
@@ -25,17 +29,17 @@ void CRectangle::SetArea(const RECT& Rect)
 	SetRenctangle(Rect);
 }
 
-bool CRectangle::CheckOverlap(std::shared_ptr<IShape> Rhs) const
+bool CRectangle::CheckOverlap(std::shared_ptr<const IShape> Rhs) const
 {
 	const EShapeType rhsShapeType{ Rhs->GetShapeType() };
 
 	switch (rhsShapeType)
 	{
-	case EShapeType::Rect:		return EngineUtil::IsOverlap(std::static_pointer_cast<CRectangle>(shared_from_this()), std::static_pointer_cast<CRectangle>(Rhs));
-	case EShapeType::Circle:	return EngineUtil::IsOverlap(std::static_pointer_cast<CRectangle>(shared_from_this()), std::static_pointer_cast<CCircle>(Rhs));
-	case EShapeType::Dot:		return EngineUtil::IsOverlap(std::static_pointer_cast<CRectangle>(shared_from_this()), std::static_pointer_cast<CDot>(Rhs));
-	case EShapeType::Line:		return EngineUtil::IsOverlap(std::static_pointer_cast<CRectangle>(shared_from_this()), std::static_pointer_cast<CLine>(Rhs));
-	case EShapeType::Polygon:	return EngineUtil::IsOverlap(std::static_pointer_cast<CRectangle>(shared_from_this()), std::static_pointer_cast<CPolygon>(Rhs));
+	case EShapeType::Rect:		return EngineUtil::IsOverlap(std::static_pointer_cast<const CRectangle>(shared_from_this()), std::static_pointer_cast<const CRectangle>(Rhs));
+	case EShapeType::Circle:	return EngineUtil::IsOverlap(std::static_pointer_cast<const CRectangle>(shared_from_this()), std::static_pointer_cast<const CCircle>(Rhs));
+	case EShapeType::Dot:		return EngineUtil::IsOverlap(std::static_pointer_cast<const CRectangle>(shared_from_this()), std::static_pointer_cast<const CDot>(Rhs));
+	case EShapeType::Line:		return EngineUtil::IsOverlap(std::static_pointer_cast<const CRectangle>(shared_from_this()), std::static_pointer_cast<const CLine>(Rhs));
+	case EShapeType::Polygon:	return EngineUtil::IsOverlap(std::static_pointer_cast<const CRectangle>(shared_from_this()), std::static_pointer_cast<const CPolygon>(Rhs));
 
 	default:	assert(false);	break;
 	}

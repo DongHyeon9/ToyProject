@@ -13,7 +13,7 @@ public:
 	void SetMaterial(Material NewMaterial) { material = NewMaterial; }
 
 	virtual void SetArea(const RECT& Rect) = 0;
-	virtual bool CheckOverlap(std::shared_ptr<IShape> Rhs) const = 0;
+	virtual bool CheckOverlap(std::shared_ptr<const IShape> Rhs) const = 0;
 	virtual bool CheckOverlap(const POINT& Point) const = 0;
 	virtual EState GetState() const = 0;
 	virtual void AddCoordinate(const POINT& Point) = 0;

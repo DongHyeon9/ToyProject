@@ -1,4 +1,8 @@
 #include "Line.h"
+#include "Polygon.h"
+#include "Rectangle.h"
+#include "Circle.h"
+#include "Dot.h"
 
 static constexpr int32 TEMP_OFFSET{ 5 };
 
@@ -19,17 +23,17 @@ void CLine::SetArea(const RECT& Rect)
 	points[1].y = Rect.bottom;
 }
 
-bool CLine::CheckOverlap(std::shared_ptr<IShape> Rhs) const
+bool CLine::CheckOverlap(std::shared_ptr<const IShape> Rhs) const
 {
 	const EShapeType rhsShapeType{ Rhs->GetShapeType() };
 
 	switch (rhsShapeType)
 	{
-	case EShapeType::Rect:		return EngineUtil::IsOverlap(std::static_pointer_cast<CRectangle>(Rhs), std::static_pointer_cast<CLine>(shared_from_this()));
-	case EShapeType::Circle:	return EngineUtil::IsOverlap(std::static_pointer_cast<CLine>(shared_from_this()), std::static_pointer_cast<CCircle>(Rhs));
-	case EShapeType::Dot:		return EngineUtil::IsOverlap(std::static_pointer_cast<CLine>(shared_from_this()), std::static_pointer_cast<CDot>(Rhs));
-	case EShapeType::Line:		return EngineUtil::IsOverlap(std::static_pointer_cast<CLine>(shared_from_this()), std::static_pointer_cast<CLine>(Rhs));
-	case EShapeType::Polygon:	return EngineUtil::IsOverlap(std::static_pointer_cast<CPolygon>(Rhs), std::static_pointer_cast<CLine>(shared_from_this()));
+	case EShapeType::Rect:		return EngineUtil::IsOverlap(std::static_pointer_cast<const CRectangle>(Rhs), std::static_pointer_cast<const CLine>(shared_from_this()));
+	case EShapeType::Circle:	return EngineUtil::IsOverlap(std::static_pointer_cast<const CLine>(shared_from_this()), std::static_pointer_cast<const CCircle>(Rhs));
+	case EShapeType::Dot:		return EngineUtil::IsOverlap(std::static_pointer_cast<const CLine>(shared_from_this()), std::static_pointer_cast<const CDot>(Rhs));
+	case EShapeType::Line:		return EngineUtil::IsOverlap(std::static_pointer_cast<const CLine>(shared_from_this()), std::static_pointer_cast<const CLine>(Rhs));
+	case EShapeType::Polygon:	return EngineUtil::IsOverlap(std::static_pointer_cast<const CPolygon>(Rhs), std::static_pointer_cast<const CLine>(shared_from_this()));
 
 	default:	assert(false);	break;
 	}

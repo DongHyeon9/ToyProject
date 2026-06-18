@@ -7,7 +7,7 @@ public:
 	CDot() :IShape(EShapeType::Dot) {}
 	
 	void SetArea(const RECT& Rect) override;
-	bool CheckOverlap(std::shared_ptr<IShape> Rhs) const override;
+	bool CheckOverlap(std::shared_ptr<const IShape> Rhs) const override;
 	bool CheckOverlap(const POINT& Point) const override;
 	EState GetState() const override;
 	void AddCoordinate(const POINT& Point) override;
