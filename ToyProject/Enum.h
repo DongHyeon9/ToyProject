@@ -3,11 +3,11 @@
 
 enum class EState : uint8
 {
-	None,
+	Idle,
 
 	Selecting,
-	Edit,
 	Move,
+	Edit,
 	Create,
 };
 
@@ -31,6 +31,7 @@ enum class EPenType : uint8
 
 	SelectBox,
 	Selected,
+	Edit,
 	TempShape,
 };
 
@@ -44,5 +45,6 @@ enum class EBrushType : uint8
 
 	SelectBox,
 	Selected,
+	Edit,
 	TempShape,
 };

@@ -11,7 +11,6 @@ public:
 private:
 	bool RegisterMessage();
 	bool RegisterCommand();
-	bool RegisterKeydown();
 
 #pragma region 메세지 처리 함수
 	LRESULT OnCommand(HWND Wnd, WPARAM wParam, LPARAM lParam);
@@ -35,6 +34,8 @@ private:
 
 #pragma region 키입력 처리 함수
 	LRESULT OnEscape(HWND Wnd, WPARAM wParam, LPARAM lParam);
+	LRESULT OnEditMode(HWND Wnd, WPARAM wParam, LPARAM lParam);
+	LRESULT OnMoveMode(HWND Wnd, WPARAM wParam, LPARAM lParam);
 #pragma endregion
 
 private:

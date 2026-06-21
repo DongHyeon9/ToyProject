@@ -55,16 +55,21 @@ void CCircle::AddCoordinate(const POINT& Point)
 	center += Point;
 }
 
-void CCircle::CandidateEditPoint(std::shared_ptr<IShape> Rect)
+void CCircle::Resize(const POINT& Point)
 {
+	radius = max(1, radius + Point.x + Point.y);
 }
-
 void CCircle::ConfirmEdit()
 {
 	center += GetRelativePoint();
 	SetRelativePoint(POINT{});
 }
 
+void CCircle::LogInfo() const
+{
+	double area = 3.14 * radius * radius;
+	LOG("원, 중심 (%d,%d), 반지름 %d, 넓이: %.2f", center.x, center.y, radius, area);
+}
 void CCircle::SetCenter(const POINT& Point)
 {
 	center = Point;

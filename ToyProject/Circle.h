@@ -11,8 +11,9 @@ public:
 	bool CheckOverlap(const POINT& Point) const override;
 	EState GetState() const override;
 	void AddCoordinate(const POINT& Point) override;
-	void CandidateEditPoint(std::shared_ptr<IShape> Rect) override;
+	void Resize(const POINT& Point) override;
 	void ConfirmEdit() override;
+	void LogInfo() const override;
 
 	void SetCenter(const POINT& Point);
 	void SetRadius(int32 Radius);

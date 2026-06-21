@@ -47,6 +47,8 @@ bool InputManager::RegisterCommand()
 	REGIST_COMMAND(ID_SELECT_DELETE, OnSelectDelete);
 
 	REGIST_KEYDOWN(VK_ESCAPE, OnEscape);
+	REGIST_KEYDOWN('E', OnEditMode);
+	REGIST_KEYDOWN('M', OnMoveMode);
 
 	return true;
 }
@@ -107,6 +109,16 @@ LRESULT InputManager::OnEscape(HWND Wnd, WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
+LRESULT InputManager::OnEditMode(HWND Wnd, WPARAM wParam, LPARAM lParam)
+{
+	ObjectManager::GetInstance().EnterEditMode();
+	return 0;
+}
+LRESULT InputManager::OnMoveMode(HWND Wnd, WPARAM wParam, LPARAM lParam)
+{
+	ObjectManager::GetInstance().EnterMoveMode();
+	return 0;
+}
 LRESULT InputManager::OnExit(HWND Wnd, WPARAM wParam, LPARAM lParam)
 {
 	::PostQuitMessage(0);

@@ -17,14 +17,17 @@ public:
 	virtual bool CheckOverlap(const POINT& Point) const = 0;
 	virtual EState GetState() const = 0;
 	virtual void AddCoordinate(const POINT& Point) = 0;
-	virtual void CandidateEditPoint(std::shared_ptr<IShape> Rect) = 0;
+	virtual void Resize(const POINT& Point) {}
 	virtual void ConfirmEdit() = 0;
+	virtual void LogInfo() const = 0;
 	
 	void SetRelativePoint(const POINT& Point);
 	POINT GetRelativePoint()const { return relativePoint; }
 	int32 GetZOrder() const { return ZOrder; }
 	bool IsSelected() const { return isSelected; }
 	void SetSelected(bool selected) { isSelected = selected; }
+	bool IsEditMode() const { return isEditMode; }
+	void SetEditMode(bool editMode) { isEditMode = editMode; }
 	EShapeType GetShapeType() const { return shapeType; }
 	uint64 GetObjectID() const { return objectID; }
 
@@ -34,6 +37,7 @@ protected:
 private:
 	int32 ZOrder{ ZOrder::NONE };
 	bool isSelected{ false };
+	bool isEditMode{ false };
 	Material material{};
 	EShapeType shapeType{};
 	uint64 objectID{};

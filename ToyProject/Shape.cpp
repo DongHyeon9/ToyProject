@@ -9,8 +9,8 @@ IShape::IShape(EShapeType ShapeType) :shapeType{ ShapeType }
 
 void IShape::SelectedRender(HDC Buffer)
 {
-	HPEN oldPen = static_cast<HPEN>(::SelectObject(Buffer, GDIManager::GetInstance().GetPen(EPenType::Selected)));
-	HBRUSH oldBrush = static_cast<HBRUSH>(::SelectObject(Buffer, GDIManager::GetInstance().GetBrush(EBrushType::Selected)));
+	HPEN oldPen = static_cast<HPEN>(::SelectObject(Buffer, GDIManager::GetInstance().GetPen(IsEditMode() ? EPenType::Edit : EPenType::Selected)));
+	HBRUSH oldBrush = static_cast<HBRUSH>(::SelectObject(Buffer, GDIManager::GetInstance().GetBrush(IsEditMode() ? EBrushType::Edit : EBrushType::Selected)));
 
 	Render_Impl(Buffer);
 

@@ -53,6 +53,7 @@ bool GDIManager::CreateBrushes()
 	brushes[EBrushType::White] = ::CreateSolidBrush(RGB(255, 255, 255));
 	brushes[EBrushType::SelectBox] = static_cast<HBRUSH>(::GetStockObject(NULL_BRUSH));
 	brushes[EBrushType::Selected] = static_cast<HBRUSH>(::GetStockObject(NULL_BRUSH));
+	brushes[EBrushType::Edit] = static_cast<HBRUSH>(::GetStockObject(NULL_BRUSH));
 	brushes[EBrushType::TempShape] = static_cast<HBRUSH>(::GetStockObject(NULL_BRUSH));
 	LOG("宏矾浆 积己 己傍");
 	return true;
@@ -66,6 +67,7 @@ bool GDIManager::CreatePens()
 	pens[EPenType::Black] = ::CreatePen(PS_SOLID, 1, RGB(0, 0, 0));
 	pens[EPenType::SelectBox] = ::CreatePen(PS_DOT, 1, RGB(0, 180, 0));
 	pens[EPenType::Selected] = ::CreatePen(PS_SOLID, 7, RGB(200, 0, 0));
+	pens[EPenType::Edit] = ::CreatePen(PS_SOLID, 7, RGB(0, 200, 0));
 	pens[EPenType::TempShape] = ::CreatePen(PS_DOT, 1, RGB(200, 0, 0));
 	LOG("奇 积己 己傍");
 	return true;

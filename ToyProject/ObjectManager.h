@@ -13,6 +13,8 @@ public:
 	void AllDelete();
 	void SelectDelete();
 	void CancelSelect();
+	void EnterMoveMode();
+	void EnterEditMode();
 
 	void SetState(EState State);
 	void SetShapeType(EShapeType ShapeType);
@@ -23,7 +25,14 @@ public:
 
 private:
 	std::shared_ptr<IShape> CreateShape(EShapeType ShapeType);
+	std::shared_ptr<IShape> FindShapeAt(const POINT& Point) const;
+	bool CheckShapeAt(const std::shared_ptr<IShape>& Shape, const POINT& Point) const;
+	void SelectShape(std::shared_ptr<IShape> Shape);
+	void LogSelectedShapes() const;
+	bool IsEditableShape(const std::shared_ptr<IShape>& Shape) const;
+	void ExitEditMode(std::shared_ptr<IShape> Shape);
 	void ResetState();
+	void ResetInteractionState();
 
 private:
 	std::vector<std::shared_ptr<IShape>> shapes{};

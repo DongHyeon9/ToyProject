@@ -10,8 +10,9 @@ public:
 	bool CheckOverlap(const POINT& Point) const override;
 	EState GetState() const override;
 	void AddCoordinate(const POINT& Point) override;
-	void CandidateEditPoint(std::shared_ptr<IShape> Rect) override;
+	void Resize(const POINT& Point) override;
 	void ConfirmEdit() override;
+	void LogInfo() const override;
 
 	void SetRenctangle(const POINT& LT, const POINT& RB);
 	void SetRenctangle(const RECT& Rect);
@@ -23,5 +24,4 @@ protected:
 
 private:
 	std::array<POINT, 4> points{};
-	std::vector<size_t> editPointIdx{};
 };

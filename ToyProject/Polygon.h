@@ -12,8 +12,9 @@ public:
 	bool CheckOverlap(const POINT& Point) const override;
 	EState GetState() const override;
 	void AddCoordinate(const POINT& Point) override;
-	void CandidateEditPoint(std::shared_ptr<IShape> Rect) override;
+	void Resize(const POINT& Point) override;
 	void ConfirmEdit() override;
+	void LogInfo() const override;
 
 	void SetPolygon(const std::array<POINT, 3>& Points);
 	void SetPoint(const POINT& Point, int32 Idx);
@@ -25,5 +26,4 @@ protected:
 
 private:
 	std::array<POINT, 3> points{};
-	std::vector<size_t> editPointIdx{};
 };

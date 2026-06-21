@@ -40,7 +40,9 @@ bool CDot::CheckOverlap(std::shared_ptr<const IShape> Rhs) const
 
 bool CDot::CheckOverlap(const POINT& Point) const
 {
-	return false;
+	const int32 dx = Point.x - point.x;
+	const int32 dy = Point.y - point.y;
+	return std::sqrt(dx * dx + dy * dy) <= SIZE_SELECTED;
 }
 
 EState CDot::GetState() const
@@ -53,16 +55,16 @@ void CDot::AddCoordinate(const POINT& Point)
 	point += Point;
 }
 
-void CDot::CandidateEditPoint(std::shared_ptr<IShape> Rect)
-{
-}
-
 void CDot::ConfirmEdit()
 {
 	point += GetRelativePoint();
 	SetRelativePoint(POINT{});
 }
 
+void CDot::LogInfo() const
+{
+	LOG("Shape: Dot, Point: (%d,%d)", point.x, point.y);
+}
 void CDot::SetPoint(const POINT& Point)
 {
 	point = Point;

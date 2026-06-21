@@ -18,10 +18,8 @@ void CPolygon::SetArea(const RECT& Rect)
 {
 	points[0].x = static_cast<int32>((Rect.left + Rect.right) * 0.5f);
 	points[0].y = Rect.top;
-
 	points[1].x = Rect.right;
 	points[1].y = Rect.bottom;
-
 	points[2].x = Rect.left;
 	points[2].y = Rect.bottom;
 }
@@ -58,7 +56,7 @@ bool CPolygon::CheckOverlap(const POINT& Point) const
 
 EState CPolygon::GetState() const
 {
-	return editPointIdx.empty() ? EState::Move : EState::Edit;
+	return EState::Move;
 }
 
 void CPolygon::AddCoordinate(const POINT& Point)
@@ -67,21 +65,47 @@ void CPolygon::AddCoordinate(const POINT& Point)
 		point += Point;
 }
 
-void CPolygon::CandidateEditPoint(std::shared_ptr<IShape> Rect)
+void CPolygon::Resize(const POINT& Point)
 {
-	for (size_t i = 0; i < points.size(); ++i)
+	int32 xMin = points[0].x;
+	int32 xMax = points[0].x;
+	int32 yMin = points[0].y;
+	int32 yMax = points[0].y;
+
+	for (const auto& point : points)
 	{
-		if (Rect->CheckOverlap(points[i]))
-			editPointIdx.emplace_back(i);
+		xMin = min(xMin, point.x);
+		xMax = max(xMax, point.x);
+		yMin = min(yMin, point.y);
+		yMax = max(yMax, point.y);
+	}
+
+	const POINT center{ (xMin + xMax) / 2, (yMin + yMax) / 2 };
+	const int32 width = max(1, xMax - xMin);
+	const int32 height = max(1, yMax - yMin);
+	const int32 newWidth = max(2, width + Point.x * 2);
+	const int32 newHeight = max(2, height + Point.y * 2);
+	const double scaleX = static_cast<double>(newWidth) / width;
+	const double scaleY = static_cast<double>(newHeight) / height;
+
+	for (auto& point : points)
+	{
+		point.x = center.x + static_cast<int32>(std::round((point.x - center.x) * scaleX));
+		point.y = center.y + static_cast<int32>(std::round((point.y - center.y) * scaleY));
 	}
 }
 
 void CPolygon::ConfirmEdit()
 {
 	SetRelativePoint(POINT{});
-	editPointIdx.clear();
 }
 
+void CPolygon::LogInfo() const
+{
+	const double area = std::abs(EngineUtil::CrossProduct(points[0], points[1], points[2])) * 0.5;
+	LOG("Shape: Triangle, Points: (%d,%d), (%d,%d), (%d,%d), Area: %.2f",
+		points[0].x, points[0].y, points[1].x, points[1].y, points[2].x, points[2].y, area);
+}
 void CPolygon::SetPolygon(const std::array<POINT, 3>& Points)
 {
 	points = Points;
