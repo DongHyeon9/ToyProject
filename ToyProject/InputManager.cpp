@@ -1,5 +1,4 @@
 #include "InputManager.h"
-#include "ObjectManager.h"
 #include "GDIManager.h"
 #include "WinApp.h"
 
@@ -38,17 +37,8 @@ bool InputManager::RegisterMessage()
 bool InputManager::RegisterCommand()
 {
 	REGIST_COMMAND(IDM_EXIT, OnExit);
-	REGIST_COMMAND(ID_ALL_DELETE, OnAllDelete);
-	REGIST_COMMAND(ID_DOT, OnDot);
-	REGIST_COMMAND(ID_LINE, OnLine);
-	REGIST_COMMAND(ID_CIRCLE, OnCircle);
-	REGIST_COMMAND(ID_TRIANGLE, OnTriangle);
-	REGIST_COMMAND(ID_RECT, OnRect);
-	REGIST_COMMAND(ID_SELECT_DELETE, OnSelectDelete);
 
 	REGIST_KEYDOWN(VK_ESCAPE, OnEscape);
-	REGIST_KEYDOWN('E', OnEditMode);
-	REGIST_KEYDOWN('M', OnMoveMode);
 
 	return true;
 }
@@ -78,20 +68,17 @@ LRESULT InputManager::OnDestroy(HWND Wnd, WPARAM wParam, LPARAM lParam)
 LRESULT InputManager::OnLButtonDown(HWND Wnd, WPARAM wParam, LPARAM lParam)
 {
 	LOG("LButtonDown : (%d, %d)", LOWORD(lParam), HIWORD(lParam));
-	ObjectManager::GetInstance().OnButtonDown({ LOWORD(lParam), HIWORD(lParam) });
 	return 0;
 }
 
 LRESULT InputManager::OnLButtonUp(HWND Wnd, WPARAM wParam, LPARAM lParam)
 {
 	LOG("LButtonUp : (%d, %d)", LOWORD(lParam), HIWORD(lParam));
-	ObjectManager::GetInstance().OnButtonUp({ LOWORD(lParam), HIWORD(lParam) });
 	return 0;
 }
 
 LRESULT InputManager::OnMouseMove(HWND Wnd, WPARAM wParam, LPARAM lParam)
 {
-	ObjectManager::GetInstance().OnMouseMove({ LOWORD(lParam), HIWORD(lParam) });
 	return 0;
 }
 
@@ -104,73 +91,12 @@ LRESULT InputManager::OnSize(HWND Wnd, WPARAM wParam, LPARAM lParam)
 
 LRESULT InputManager::OnEscape(HWND Wnd, WPARAM wParam, LPARAM lParam)
 {
-	ObjectManager::GetInstance().CancelSelect();
-	LOG("선택 취소");
 	return 0;
 }
 
-LRESULT InputManager::OnEditMode(HWND Wnd, WPARAM wParam, LPARAM lParam)
-{
-	ObjectManager::GetInstance().EnterEditMode();
-	return 0;
-}
-LRESULT InputManager::OnMoveMode(HWND Wnd, WPARAM wParam, LPARAM lParam)
-{
-	ObjectManager::GetInstance().EnterMoveMode();
-	return 0;
-}
 LRESULT InputManager::OnExit(HWND Wnd, WPARAM wParam, LPARAM lParam)
 {
 	::PostQuitMessage(0);
-	return 0;
-}
-
-LRESULT InputManager::OnAllDelete(HWND Wnd, WPARAM wParam, LPARAM lParam)
-{
-	ObjectManager::GetInstance().AllDelete();
-	LOG("전체 삭제");
-	return 0;
-}
-
-LRESULT InputManager::OnSelectDelete(HWND Wnd, WPARAM wParam, LPARAM lParam)
-{
-	ObjectManager::GetInstance().SelectDelete();
-	LOG("선택 삭제");
-	return 0;
-}
-
-LRESULT InputManager::OnDot(HWND Wnd, WPARAM wParam, LPARAM lParam)
-{
-	ObjectManager::GetInstance().SetState(EState::Create);
-	ObjectManager::GetInstance().SetShapeType(EShapeType::Dot);
-	return 0;
-}
-
-LRESULT InputManager::OnLine(HWND Wnd, WPARAM wParam, LPARAM lParam)
-{
-	ObjectManager::GetInstance().SetState(EState::Create);
-	ObjectManager::GetInstance().SetShapeType(EShapeType::Line);
-	return 0;
-}
-
-LRESULT InputManager::OnCircle(HWND Wnd, WPARAM wParam, LPARAM lParam)
-{
-	ObjectManager::GetInstance().SetState(EState::Create);
-	ObjectManager::GetInstance().SetShapeType(EShapeType::Circle);
-	return 0;
-}
-
-LRESULT InputManager::OnTriangle(HWND Wnd, WPARAM wParam, LPARAM lParam)
-{
-	ObjectManager::GetInstance().SetState(EState::Create);
-	ObjectManager::GetInstance().SetShapeType(EShapeType::Polygon);
-	return 0;
-}
-
-LRESULT InputManager::OnRect(HWND Wnd, WPARAM wParam, LPARAM lParam)
-{
-	ObjectManager::GetInstance().SetState(EState::Create);
-	ObjectManager::GetInstance().SetShapeType(EShapeType::Rect);
 	return 0;
 }
 

@@ -14,12 +14,6 @@
     <Filter Include="99_Etc">
       <UniqueIdentifier>{8a157ac3-fcdd-4ff3-9b54-93e07ec6dd0a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03_Object">
-      <UniqueIdentifier>{e0f2e93a-4e37-45d2-aaf5-399245543668}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03_Object\Shape">
-      <UniqueIdentifier>{d2526b8a-2bf5-4e7a-a055-2a55bc8be218}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Struct.h">
@@ -52,29 +46,8 @@
     <ClInclude Include="TimerManager.h">
       <Filter>02_Manager</Filter>
     </ClInclude>
-    <ClInclude Include="Shape.h">
-      <Filter>03_Object</Filter>
-    </ClInclude>
     <ClInclude Include="GDIManager.h">
       <Filter>02_Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjectManager.h">
-      <Filter>02_Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="Polygon.h">
-      <Filter>03_Object\Shape</Filter>
-    </ClInclude>
-    <ClInclude Include="Rectangle.h">
-      <Filter>03_Object\Shape</Filter>
-    </ClInclude>
-    <ClInclude Include="Line.h">
-      <Filter>03_Object\Shape</Filter>
-    </ClInclude>
-    <ClInclude Include="Dot.h">
-      <Filter>03_Object\Shape</Filter>
-    </ClInclude>
-    <ClInclude Include="Circle.h">
-      <Filter>03_Object\Shape</Filter>
     </ClInclude>
     <ClInclude Include="InputManager.h">
       <Filter>02_Manager</Filter>
@@ -104,29 +77,8 @@
     <ClCompile Include="TimerManager.cpp">
       <Filter>02_Manager</Filter>
     </ClCompile>
-    <ClCompile Include="Shape.cpp">
-      <Filter>03_Object</Filter>
-    </ClCompile>
     <ClCompile Include="GDIManager.cpp">
       <Filter>02_Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjectManager.cpp">
-      <Filter>02_Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="Polygon.cpp">
-      <Filter>03_Object\Shape</Filter>
-    </ClCompile>
-    <ClCompile Include="Rectangle.cpp">
-      <Filter>03_Object\Shape</Filter>
-    </ClCompile>
-    <ClCompile Include="Line.cpp">
-      <Filter>03_Object\Shape</Filter>
-    </ClCompile>
-    <ClCompile Include="Dot.cpp">
-      <Filter>03_Object\Shape</Filter>
-    </ClCompile>
-    <ClCompile Include="Circle.cpp">
-      <Filter>03_Object\Shape</Filter>
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
       <Filter>02_Manager</Filter>

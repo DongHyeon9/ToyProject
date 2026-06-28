@@ -1,7 +1,6 @@
 #include "WinApp.h"
 
 #include "TimerManager.h"
-#include "ObjectManager.h"
 #include "GDIManager.h"
 #include "InputManager.h"
 
@@ -46,7 +45,6 @@ void WinApp::Terminate()
 {
 	TimerManager::GetInstance().Terminate();
 	GDIManager::GetInstance().Terminate();
-	ObjectManager::GetInstance().Terminate();
 	InputManager::GetInstance().Terminate();
 }
 
@@ -60,7 +58,6 @@ void WinApp::Render()
 {
 	RECT rc = GDIManager::GetInstance().RenderBegin(desc.wnd);
 
-	ObjectManager::GetInstance().Render(GDIManager::GetInstance().GetBackBuffer(), rc);
 
 	GDIManager::GetInstance().RenderEnd(desc.wnd);
 }
@@ -116,7 +113,6 @@ bool WinApp::InitManager()
 {
 	CHECK(TimerManager::GetInstance().Init(), "타이머 매니저 초기화 실패", false);
 	CHECK(GDIManager::GetInstance().Init(), "GDI 매니저 초기화 실패", false);
-	CHECK(ObjectManager::GetInstance().Init(), "오브젝트 매니저 초기화 실패", false);
 	CHECK(InputManager::GetInstance().Init(), "입력 매니저 초기화 실패", false);
 
 	LOG("매니저 초기화 성공");

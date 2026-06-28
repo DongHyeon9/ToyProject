@@ -23,19 +23,10 @@ private:
 
 #pragma region 커맨드 처리 함수
 	LRESULT OnExit(HWND Wnd, WPARAM wParam, LPARAM lParam);
-	LRESULT OnAllDelete(HWND Wnd, WPARAM wParam, LPARAM lParam);
-	LRESULT OnSelectDelete(HWND Wnd, WPARAM wParam, LPARAM lParam);
-	LRESULT OnDot(HWND Wnd, WPARAM wParam, LPARAM lParam);
-	LRESULT OnLine(HWND Wnd, WPARAM wParam, LPARAM lParam);
-	LRESULT OnCircle(HWND Wnd, WPARAM wParam, LPARAM lParam);
-	LRESULT OnTriangle(HWND Wnd, WPARAM wParam, LPARAM lParam);
-	LRESULT OnRect(HWND Wnd, WPARAM wParam, LPARAM lParam);
 #pragma endregion
 
 #pragma region 키입력 처리 함수
 	LRESULT OnEscape(HWND Wnd, WPARAM wParam, LPARAM lParam);
-	LRESULT OnEditMode(HWND Wnd, WPARAM wParam, LPARAM lParam);
-	LRESULT OnMoveMode(HWND Wnd, WPARAM wParam, LPARAM lParam);
 #pragma endregion
 
 private:

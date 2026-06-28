@@ -1,27 +1,6 @@
 #pragma once
 #include "Type.h"
 
-enum class EState : uint8
-{
-	Idle,
-
-	Selecting,
-	Move,
-	Edit,
-	Create,
-};
-
-enum class EShapeType : uint8
-{
-	None,
-
-	Dot,
-	Line,
-	Circle,
-	Polygon,
-	Rect
-};
-
 enum class EPenType : uint8
 { 
 	Black,

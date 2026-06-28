@@ -6,13 +6,6 @@
 #define IDI_TOYPROJECT                  107
 #define IDI_SMALL                       108
 #define IDC_TOYPROJECT                  109
-#define ID_ALL_DELETE                   32779
-#define ID_DOT                          32780
-#define ID_LINE                         32781
-#define ID_CIRCLE                       32782
-#define ID_TRIANGLE                     32783
-#define ID_RECT                         32784
-#define ID_SELECT_DELETE                32787
 #define IDC_STATIC                      -1
 
 // Next default values for new objects
