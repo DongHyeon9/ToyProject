@@ -45,7 +45,7 @@ bool InputManager::RegisterCommand()
 
 LRESULT InputManager::WinProc(HWND Wnd, UINT Message, WPARAM wParam, LPARAM lParam)
 {
-	if (messageLUT.contains(Message))
+	if (messageLUT.find(Message) != messageLUT.end())
 		return messageLUT[Message](Wnd, wParam, lParam);
 	return ::DefWindowProc(Wnd, Message, wParam, lParam);
 }
@@ -54,7 +54,7 @@ LRESULT InputManager::OnCommand(HWND Wnd, WPARAM wParam, LPARAM lParam)
 {
 	int wmId = LOWORD(wParam);
 
-	if(commandLUT.contains(wmId))
+	if (commandLUT.find(wmId) != commandLUT.end())
 		return commandLUT[wmId](Wnd, wParam, lParam);
 	return ::DefWindowProc(Wnd, WM_COMMAND, wParam, lParam);
 }
